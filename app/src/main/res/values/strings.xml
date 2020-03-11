@@ -3,4 +3,6 @@
     <string name="album_artwork">Album Artwork</string>
     <string name="i_m_not_a_rapper">I\'m Not a Rapper</string>
     <string name="supahotfire">SupaHotFire</string>
+    <string name="album_list_fragment_label">Album List</string>
+    <string name="album_details_fragment_label">Details</string>
 </resources>

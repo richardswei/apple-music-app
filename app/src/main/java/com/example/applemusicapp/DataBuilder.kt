@@ -1,14 +1,5 @@
 package com.example.applemusicapp
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import okhttp3.*
-import org.json.JSONObject
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-
 
 class DataBuilder() {
     private fun loadData() {
