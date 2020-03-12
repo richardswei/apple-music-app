@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applemusicapp.data.Album
 import com.squareup.picasso.Picasso
@@ -16,7 +17,7 @@ class AlbumAdapter(private val context: Context, private val albumResults: List<
     RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//      each item in the list is a view holder
+//        each item in the list is a view holder
 //        inflating means build
 //        returns a view holder that acts as a template for each one
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
@@ -28,12 +29,31 @@ class AlbumAdapter(private val context: Context, private val albumResults: List<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // onBind runs once for each item
-        holder.albumName.text = albumResults[position].name
-        holder.artistName.text = albumResults[position].artistName
+        val currAlbum = albumResults[position]
+        holder.albumName.text = currAlbum.name
+        holder.artistName.text = currAlbum.artistName
         //  use picasso/glide for setting the image in the viewHolder
-        Picasso.get().load(albumResults[position].artworkUrl100).into(holder.imageView)
-        holder.itemView.setOnClickListener {
-            Toast.makeText(context, albumResults[position].name, Toast.LENGTH_SHORT).show()
+        Picasso.get().load(currAlbum.artworkUrl100).into(holder.imageView)
+        // get genres
+        val genres = ArrayList<String>()
+        for ((k, v) in currAlbum.genres) {
+            genres.add(v)
+        }
+        holder.itemView.setOnClickListener {view ->
+            val bundle = bundleOf(
+                "artistName" to currAlbum.artistName,
+                "albumName" to currAlbum.name,
+                "id" to currAlbum.id,
+                "releaseDate" to currAlbum.releaseDate,
+                "kind" to currAlbum.kind,
+                "copyright" to currAlbum.copyright,
+                "artistId" to currAlbum.artistId,
+                "contentAdvisoryRating" to currAlbum.contentAdvisoryRating,
+                "artistUrl" to currAlbum.artistUrl,
+                "genres" to genres.joinToString(", "),
+                "artworkUrl100" to currAlbum.artworkUrl100
+            )
+            view.findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment, bundle)
         }
     }
 

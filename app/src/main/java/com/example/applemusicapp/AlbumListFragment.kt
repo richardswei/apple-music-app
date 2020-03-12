@@ -45,14 +45,12 @@ class AlbumListFragment : Fragment() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {  data -> handleResponse(data.feed.albums) },
+                { data -> handleResponse(data.feed.albums) },
                 { error -> Toast.makeText(this.context, error.message, Toast.LENGTH_LONG).show() }
             )
     }
     private fun handleResponse(albumList: List<Album>) {
-        println(albumList)
         //Set the adapter//
-
         rvAlbumList.adapter = AlbumAdapter(this.requireContext(), albumList)
     }
 

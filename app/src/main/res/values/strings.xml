@@ -5,4 +5,11 @@
     <string name="supahotfire">SupaHotFire</string>
     <string name="album_list_fragment_label">Album List</string>
     <string name="album_details_fragment_label">Details</string>
+    <string name="back">❮</string>
+    <string name="albumName">placeholder</string>
+    <string name="artistName">artistName</string>
+    <string name="explicit">explicit</string>
+    <string name="releaseDate">Released: %1$s</string>
+    <string name="genres">Genre(s): %1$s</string>
+    <string name="copyright">copyright</string>
 </resources>
