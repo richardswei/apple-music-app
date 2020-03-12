@@ -35,13 +35,12 @@ class AlbumListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this.requireContext())
-        rvAlbumList.layoutManager = layoutManager
-        retrieveTopAlbums()
+        retrieveTopAlbums(50, true)
     }
 
-    private fun retrieveTopAlbums() {
-        disposable = appleServe.getData(20, "non-explicit")
+    private fun retrieveTopAlbums(numToGet: Int, explicit: Boolean) {
+        val typeAllowed = if (explicit) "explicit" else "non-explicit"
+        disposable = appleServe.getData(numToGet, typeAllowed)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -51,6 +50,8 @@ class AlbumListFragment : Fragment() {
     }
     private fun handleResponse(albumList: List<Album>) {
         //Set the adapter//
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this.requireContext())
+        rvAlbumList.layoutManager = layoutManager
         rvAlbumList.adapter = AlbumAdapter(this.requireContext(), albumList)
     }
 

@@ -14,7 +14,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Album (
-
 	@SerializedName("artistName") val artistName : String,
 	@SerializedName("id") val id : Int,
 	@SerializedName("releaseDate") val releaseDate : String,
