@@ -15,7 +15,9 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.album_list_fragment.*
 
 class AlbumListFragment : Fragment() {
+//    have a rxJava disposable, this will be the data from the rss
     private var disposable: Disposable? = null
+//    create the rss req interface obj
     private val appleServe by lazy {
         AppleMusicService.create()
     }
@@ -35,7 +37,8 @@ class AlbumListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        retrieveTopAlbums(50, true)
+//        get and send the albums to the adapter
+        retrieveTopAlbums(25, true)
     }
 
     private fun retrieveTopAlbums(numToGet: Int, explicit: Boolean) {

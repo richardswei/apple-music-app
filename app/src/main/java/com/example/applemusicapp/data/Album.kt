@@ -11,9 +11,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 package com.example.applemusicapp.data
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
-data class Album (
+data class Album(
 	@SerializedName("artistName") val artistName : String,
 	@SerializedName("id") val id : Int,
 	@SerializedName("releaseDate") val releaseDate : String,
@@ -26,4 +27,4 @@ data class Album (
 	@SerializedName("artworkUrl100") val artworkUrl100 : String,
 	@SerializedName("genres") val genres : List<Genres>,
 	@SerializedName("url") val url : String
-)
+) : Serializable

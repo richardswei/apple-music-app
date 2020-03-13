@@ -1,6 +1,7 @@
 package com.example.applemusicapp
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,8 @@ class AlbumAdapter(private val context: Context, private val albumResults: List<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // onBind runs once for each item
-        val currAlbum = albumResults[position]
+        val currAlbum  = albumResults[position]
+
         holder.albumName.text = currAlbum.name
         holder.artistName.text = currAlbum.artistName
         //  use picasso/glide for setting the image in the viewHolder
@@ -40,20 +42,8 @@ class AlbumAdapter(private val context: Context, private val albumResults: List<
             genres.add(v)
         }
         holder.itemView.setOnClickListener {view ->
-            val bundle = bundleOf(
-                "artistName" to currAlbum.artistName,
-                "albumName" to currAlbum.name,
-                "id" to currAlbum.id,
-                "releaseDate" to currAlbum.releaseDate,
-                "kind" to currAlbum.kind,
-                "copyright" to currAlbum.copyright,
-                "artistId" to currAlbum.artistId,
-                "contentAdvisoryRating" to currAlbum.contentAdvisoryRating,
-                "artistUrl" to currAlbum.artistUrl,
-                "genres" to genres.joinToString(", "),
-                "artworkUrl100" to currAlbum.artworkUrl100
-            )
-            view.findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment, bundle)
+            val bundleAlbum = Bundle().apply { putSerializable("album", currAlbum) }
+            view.findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment, bundleAlbum)
         }
     }
 
